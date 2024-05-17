@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +36,21 @@ class BoxGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Color> colors = [
+      Colors.red,
+      Colors.green,
+      Colors.blue,
+      Colors.yellow,
+      Colors.purple,
+      Colors.orange,
+      Colors.pink,
+      Colors.teal,
+      Colors.brown,
+      Colors.cyan,
+      Colors.lime,
+      Colors.indigo,
+    ];
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: GridView.count(
@@ -50,7 +69,7 @@ class BoxGrid extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: colors[index % colors.length],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
@@ -102,6 +121,17 @@ class SecondScreen extends StatelessWidget {
                     SizedBox(height: 16),
                   ],
                 ),
+              if (boxNumber == 1)
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PdfViewScreen()),
+                    );
+                  },
+                  child: const Text('Open PDF'),
+                ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -112,6 +142,54 @@ class SecondScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class PdfViewScreen extends StatefulWidget {
+  const PdfViewScreen({Key? key}) : super(key: key);
+
+  @override
+  _PdfViewScreenState createState() => _PdfViewScreenState();
+}
+
+class _PdfViewScreenState extends State<PdfViewScreen> {
+  String pathPDF = "";
+
+  @override
+  void initState() {
+    super.initState();
+    fromAsset('assets/sample.pdf', 'sample.pdf').then((f) {
+      setState(() {
+        pathPDF = f.path;
+      });
+    });
+  }
+
+  Future<File> fromAsset(String asset, String filename) async {
+    try {
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/$filename");
+      var data = await rootBundle.load(asset);
+      var bytes = data.buffer.asUint8List();
+      await file.writeAsBytes(bytes, flush: true);
+      return file;
+    } catch (e) {
+      throw Exception("Error copying asset file: $e");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('PDF View'),
+      ),
+      body: pathPDF.isNotEmpty
+          ? PDFView(
+              filePath: pathPDF,
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
