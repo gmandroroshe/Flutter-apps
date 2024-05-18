@@ -12,7 +12,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "widgets",
-      home: Scaffold(body: Image.asset("assets/image1.png")),
+      home: Scaffold(
+        body: Center(
+          child: Image.asset(
+            "assets/image1.jpeg",
+            height: 100,
+          ),
+        ),
+      ),
     );
   }
 }
