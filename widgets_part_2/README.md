@@ -1,4 +1,4 @@
-# to_do_app
+# widgets_part_2
 
 A new Flutter project.
 
@@ -14,5 +14,3 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-
-A feature-rich Flutter app built with a modern UI and seamless user experience. This app leverages Flutter's powerful framework to deliver cross-platform functionality for both Android and iOS. Explore the code, contribute, and help improve the project!
