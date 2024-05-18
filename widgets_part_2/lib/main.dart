@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
               height: 100,
             ),
             Image.asset(
-              "assets/image1.png",
+              "assets/image1.jpeg",
               height: 100,
             ),
             Image.asset(
-              "assets/image1.jpeg",
+              "assets/image2.jpeg",
               height: 100,
             ),
           ],
