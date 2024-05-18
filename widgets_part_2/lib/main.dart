@@ -10,14 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: "widgets",
       home: Scaffold(
-        body: Center(
-          child: Image.asset(
-            "assets/image1.jpeg",
-            height: 100,
-          ),
+        body: Image.asset(
+          "assets/image1.png",
+          height: 100,
         ),
       ),
     );
