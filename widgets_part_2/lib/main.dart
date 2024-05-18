@@ -12,9 +12,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "widgets",
       home: Scaffold(
-        body: Image.asset(
-          "assets/image1.png",
-          height: 100,
+        body: Column(
+          children: [
+            Image.asset(
+              "assets/image1.png",
+              height: 100,
+            ),
+            Image.asset(
+              "assets/image1.png",
+              height: 100,
+            ),
+            Image.asset(
+              "assets/image1.jpeg",
+              height: 100,
+            ),
+          ],
         ),
       ),
     );
