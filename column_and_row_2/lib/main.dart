@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
                 width: double.infinity,
                 height: 100,
                 decoration: BoxDecoration(
-                    color: Colors.yellow,
+                    color: const Color.fromRGBO(255, 235, 59, 1),
                     borderRadius: BorderRadius.circular(5)),
               ),
               Row(
@@ -31,14 +31,14 @@ class MyApp extends StatelessWidget {
                     width: 105,
                     height: 100,
                     decoration: BoxDecoration(
-                        color: Colors.yellow,
+                        color: const Color.fromRGBO(255, 235, 59, 1),
                         borderRadius: BorderRadius.circular(5)),
                   ),
                   Container(
                     width: 105,
                     height: 100,
                     decoration: BoxDecoration(
-                        color: Colors.yellow,
+                        color: const Color.fromRGBO(255, 235, 59, 1),
                         borderRadius: BorderRadius.circular(5)),
                   ),
                 ],
