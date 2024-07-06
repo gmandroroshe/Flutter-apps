@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'note_page.dart';
+import 'settings_page.dart'; // Import your SettingsPage
 
 void main() {
   runApp(MyApp());
@@ -13,6 +14,11 @@ class MyApp extends StatelessWidget {
       title: 'Note App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.light, // Default theme is light mode
+      ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark, // Dark mode theme
       ),
       home: NoteHomePage(),
     );
@@ -33,14 +39,14 @@ class _NoteHomePageState extends State<NoteHomePage> {
     _loadNotes();
   }
 
-  void _loadNotes() async {
+  Future<void> _loadNotes() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       notes = prefs.getStringList('notes') ?? [];
     });
   }
 
-  void _saveNotes() async {
+  Future<void> _saveNotes() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('notes', notes);
   }
@@ -61,19 +67,52 @@ class _NoteHomePageState extends State<NoteHomePage> {
     }
   }
 
+  void _viewFullNote(String note) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Full Note'),
+          content: Text(note),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _openSettingsPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Note App'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: _openSettingsPage,
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: notes.length,
         itemBuilder: (context, index) {
           return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(notes[index]),
+            child: ListTile(
+              title: Text(notes[index]),
+              onTap: () => _viewFullNote(notes[index]),
             ),
           );
         },
@@ -82,6 +121,44 @@ class _NoteHomePageState extends State<NoteHomePage> {
         onPressed: _addNote,
         child: Icon(Icons.add),
       ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                // Navigate to home or implement functionality
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.explore),
+              onPressed: () {
+                // Navigate to explore or implement functionality
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                // Navigate to notifications or implement functionality
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: _openSettingsPage,
+            ),
+
+            // IconButton(
+            //   icon: Icon(Icons.person),
+            //   onPressed: () {
+            //     // Navigate to profile or implement functionality
+            //   },
+            // ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
