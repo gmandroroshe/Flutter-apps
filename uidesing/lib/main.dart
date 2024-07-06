@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: Text('Beautiful UI Home'),
+        title: const Text('Beautiful UI Home'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -43,8 +43,8 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: kToolbarHeight + 20),
-                Text(
+                const SizedBox(height: kToolbarHeight + 20),
+                const Text(
                   'Welcome to the Beautiful UI App',
                   style: TextStyle(
                     fontSize: 28,
@@ -52,49 +52,49 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SectionHeader(title: 'Favorites'),
                 CustomCard(
                   icon: Icons.star,
                   text: 'This is a card with some text and an icon.',
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CustomCard(
                   icon: Icons.favorite,
                   text: 'Another beautiful card with a different icon.',
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SectionHeader(title: 'Ideas'),
                 CustomCard(
                   icon: Icons.lightbulb,
                   text: 'Yet another card with an inspiring icon.',
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SectionHeader(title: 'Gallery'),
                 GalleryImage(imagePath: 'assets/images/sample1.jpg'),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GalleryImage(imagePath: 'assets/images/sample2.jpg'),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: Text('Get Started'),
+                    child: const Text('Get Started'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal.shade700,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                      textStyle: TextStyle(fontSize: 18),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                      textStyle: const TextStyle(fontSize: 18),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Center(
                   child: TextButton(
                     onPressed: () {},
-                    child: Text('Learn More',
+                    child: const Text('Learn More',
                         style: TextStyle(color: Colors.white, fontSize: 16)),
                   ),
                 ),
@@ -104,7 +104,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
           height: 60,
@@ -137,7 +137,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.pinkAccent,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -155,7 +155,7 @@ class CustomCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.8),
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 6,
@@ -163,11 +163,11 @@ class CustomCard extends StatelessWidget {
           ),
         ],
       ),
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         children: [
           Icon(icon, color: Colors.teal, size: 40),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Text(
               text,
@@ -189,7 +189,7 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: Colors.white,
@@ -208,7 +208,7 @@ class GalleryImage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 6,
