@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'note_page.dart';
 import 'settings_page.dart'; // Import your SettingsPage
 
+
 void main() {
   runApp(MyApp());
 }
