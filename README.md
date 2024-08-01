@@ -1,3 +1,26 @@
+#Project Name: Coffee Shop E-Commerce App
+
+![Screenshot (96)](https://github.com/user-attachments/assets/91f34aa1-6386-4f1d-9d23-bc5bef5c93f6)
+
+Description:
+Developed a feature-rich Coffee Shop E-Commerce mobile application using Flutter. This project showcases a sleek and intuitive UI designed for a dark theme to provide a modern and user-friendly experience. Key features include:
+
+Home Page: A visually appealing app bar with a name and settings icon, a search bar, a categorized list of coffee types, and a grid of product cards.
+Product Detail Page: Detailed product information with a large image, price, description, and additional details, enhanced by smooth transition animations.
+Navigation: Seamless navigation between the home page and product detail pages with sophisticated animations.
+Dark Theme: Comprehensive dark theme integration to ensure a consistent and aesthetic user experience across the app.
+Technologies Used:
+
+Flutter: For building the cross-platform mobile application.
+Dart: The programming language used with Flutter.
+Hero Animations: To create smooth transitions between screens.
+Material Design: For creating a consistent and intuitive user interface.
+Asset Management: For handling images and other resources efficiently.
+This app demonstrates my proficiency in Flutter, UI/UX design, state management, and animation. It also highlights my ability to create visually appealing and functional mobile applications for e-commerce purposes.
+
+
+
+
 # Flutter simple apps
 
 A feature-rich Flutter app built with a modern UI and seamless user experience. This app leverages Flutter's powerful framework to deliver cross-platform functionality for both Android and iOS. Explore the code, contribute, and help improve the project!
