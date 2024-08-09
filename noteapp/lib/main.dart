@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'note_page.dart';
-import 'settings_page.dart'; // Import your SettingsPage
-
+import 'settings_page.dart';
+import 'todo_page.dart'; // Import the ToDoPage
 
 void main() {
   runApp(MyApp());
@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Note App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -60,38 +61,56 @@ class _NoteHomePageState extends State<NoteHomePage> {
 
     if (newNote != null) {
       setState(() {
-        final truncatedNote =
-            newNote.substring(0, newNote.length > 30 ? 30 : newNote.length);
-        notes.add(truncatedNote);
-        _saveNotes(); // Save notes after adding a new one
+        notes.add(newNote);
+        _saveNotes();
       });
     }
   }
 
-  void _viewFullNote(String note) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Full Note'),
-          content: Text(note),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
+  void _editNote(int index) async {
+    final editedNote = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NotePage(note: notes[index]),
+      ),
     );
+
+    if (editedNote != null) {
+      setState(() {
+        notes[index] = editedNote;
+        _saveNotes();
+      });
+    }
+  }
+
+  void _deleteNote(int index) {
+    setState(() {
+      notes.removeAt(index);
+      _saveNotes();
+    });
+  }
+
+  String _getPreview(String note) {
+    final words = note.split(' ');
+    if (words.length <= 20) return note;
+    return words.sublist(0, 20).join(' ') + '...';
+  }
+
+  void _viewFullNote(int index) {
+    _editNote(index);
   }
 
   void _openSettingsPage() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SettingsPage()),
+    );
+  }
+
+  void _openToDoPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ToDoPage()),
     );
   }
 
@@ -112,8 +131,12 @@ class _NoteHomePageState extends State<NoteHomePage> {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: Text(notes[index]),
-              onTap: () => _viewFullNote(notes[index]),
+              title: Text(_getPreview(notes[index])),
+              onTap: () => _viewFullNote(index),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () => _deleteNote(index),
+              ),
             ),
           );
         },
@@ -130,32 +153,23 @@ class _NoteHomePageState extends State<NoteHomePage> {
             IconButton(
               icon: Icon(Icons.home),
               onPressed: () {
-                // Navigate to home or implement functionality
+                // Implement home functionality or navigation
               },
             ),
             IconButton(
               icon: Icon(Icons.explore),
               onPressed: () {
-                // Navigate to explore or implement functionality
+                // Implement explore functionality or navigation
               },
             ),
             IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () {
-                // Navigate to notifications or implement functionality
-              },
+              icon: Icon(Icons.check_circle), // ToDo icon
+              onPressed: _openToDoPage,
             ),
             IconButton(
               icon: Icon(Icons.settings),
               onPressed: _openSettingsPage,
             ),
-
-            // IconButton(
-            //   icon: Icon(Icons.person),
-            //   onPressed: () {
-            //     // Navigate to profile or implement functionality
-            //   },
-            // ),
           ],
         ),
       ),
